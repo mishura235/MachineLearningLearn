@@ -54,8 +54,7 @@ fun backwards(
     while (y<weightsY){
         var x = 0
         while (x<weightsX){
-            weights[x][y] = weights[x][y] + k * output[y][1] * output[y][1] * ( 1- output[y][1]) * input[x][0]
-
+            weights[x][y] = weights[x][y] + k * output[y][1] * output[y][0] * ( 1 - output[y][0]) * input[x][0]
             x++
         }
         y++
@@ -88,7 +87,7 @@ fun main() {
         N2.add(mutableListOf(0.0,0.0))
     }
 
-    var IDL = mutableListOf(mutableListOf(0.5))
+    var IDL = mutableListOf(mutableListOf(0.1))
 
     val W01 = mutableListOf<MutableList<Double>>()
     repeat(2){
@@ -108,8 +107,8 @@ fun main() {
 
         backwards(N1, W12, N2, 0.1)
         backwards(N0, W01, N1, 0.1)
+        println(N2)
 
-        println(N2[0])
     }
 
 }
