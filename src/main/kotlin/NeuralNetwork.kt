@@ -5,7 +5,7 @@ import kotlin.math.exp
 
 /**
  * работает
- *  сделано по https://www.youtube.com/watch?v=lDxyGKGVq3s&t=345s
+ * сделано по https://www.youtube.com/watch?v=lDxyGKGVq3s&t=345s
  */
 
 

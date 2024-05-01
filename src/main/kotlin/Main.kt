@@ -1,17 +1,22 @@
 package org.example
 
+
+
 fun main() {
-    val model = NeuralNetwork(3)
-    val inputs = mutableListOf<Double>(0.0, 0.0)
-    val output = mutableListOf<Double>(0.0)
-    var out = model.fit(inputs)
-    var error = output[0] - out[0]
-    while (error > 0.1 || error < -0.1){
-        model.findError(error)
-        model.backward()
-        out = model.fit(inputs)
-        error =  out[0]-output[0]
-        println(error)
-        println(out)
+    val x = mutableListOf(Value(0.0))
+    val model = MLP(1, mutableListOf(4,4,1))
+    val y = Value(1.0)
+    var ypred = model.forward(x)[0]
+    var loss = (ypred - y) * (ypred - y)
+    println(loss)
+    while (loss.data>0.01) {
+        println("Loss=${loss.data}")
+        ypred = model.forward(x)[0]
+        loss = (ypred - y) * (ypred - y)
+        loss.backwardAll()
+        model.parameters().forEach {
+            it.data += -0.01 * it.grad
+        }
+        println("Predicted=${ypred.data}")
     }
 }
